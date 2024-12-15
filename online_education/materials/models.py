@@ -21,7 +21,7 @@ class Lesson(models.Model):
     preview = models.ImageField(upload_to="lesson image/", blank=True, null=True)
     link_on_video = models.URLField(verbose_name="сылка на видео урока", blank=True, null=True)
     course = models.ForeignKey(
-        Course, blank=True, null=True, on_delete=models.SET_NULL, related_name="course", verbose_name="Курс"
+        Course, blank=True, null=True, on_delete=models.SET_NULL, related_name="lesson", verbose_name="Курс"
     )
 
     def __str__(self):
