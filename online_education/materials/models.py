@@ -1,10 +1,14 @@
 from django.db import models
 
+from config import settings
+
 
 class Course(models.Model):
     name = models.CharField(verbose_name="Название курса")
     preview = models.ImageField(upload_to="course image/", blank=True, null=True)
     description = models.TextField(verbose_name="Описание курса", blank=True, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True,
+                             related_name="course", verbose_name="пользователь")
 
     def __str__(self):
         return f"{self.name}"
@@ -23,6 +27,8 @@ class Lesson(models.Model):
     course = models.ForeignKey(
         Course, blank=True, null=True, on_delete=models.SET_NULL, related_name="lesson", verbose_name="Курс"
     )
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.CASCADE,
+                             related_name="lesson", verbose_name="пользователь")
 
     def __str__(self):
         return f"{self.name}"

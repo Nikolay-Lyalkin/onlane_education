@@ -8,6 +8,18 @@ class UserSerializer(ModelSerializer):
         fields = "__all__"
 
 
+class UserCreateSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = "__all__"
+
+
+class UserRetrieveSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("username", "email", "phone_number")
+
+
 class PaymentsSerializer(ModelSerializer):
 
     class Meta:
