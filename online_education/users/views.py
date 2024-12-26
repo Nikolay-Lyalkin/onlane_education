@@ -6,8 +6,14 @@ from rest_framework.permissions import IsAuthenticated
 
 from .models import User, Payments
 from .permissions import CanUserUpdate
-from .serializers import UserSerializer, PaymentsSerializer, PaymentsListSerializer, UserListSerializer, \
-    UserCreateSerializer, UserRetrieveSerializer
+from .serializers import (
+    UserSerializer,
+    PaymentsSerializer,
+    PaymentsListSerializer,
+    UserListSerializer,
+    UserCreateSerializer,
+    UserRetrieveSerializer,
+)
 
 
 class UserListAPIView(generics.ListAPIView):
