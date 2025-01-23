@@ -16,6 +16,16 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+import logging
+logger = logging.getLogger(__name__)
+# Создаем хендлер для вывода в консоль
+console_handler = logging.StreamHandler()
+file_formatter = logging.Formatter('%(message)s')
+console_handler.setFormatter(file_formatter)
+logger.addHandler(console_handler)
+logger.setLevel(logging.INFO)
+
+
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -54,7 +64,7 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware"
 ]
 
 ROOT_URLCONF = "config.urls"
