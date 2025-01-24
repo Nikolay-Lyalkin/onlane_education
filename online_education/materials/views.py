@@ -7,8 +7,16 @@ from rest_framework.response import Response
 from .models import Course, Lesson, Subscribe
 from .paginators import PaginationCourse, PaginationLesson
 from .permissions import IsModerator, IsOwner
-from .serializers import CourseSerializer, LessonSerializer, CourseListSerializer, LessonCreateSerializer, \
-    SubscribeSerializer, CourseRetrieveSerializer
+from .serializers import (
+    CourseSerializer,
+    LessonSerializer,
+    CourseListSerializer,
+    LessonCreateSerializer,
+    SubscribeSerializer,
+    CourseRetrieveSerializer,
+    PaymentSerializer,
+)
+from .services import get_product, get_price, get_session
 
 
 class CourseListAPIView(generics.ListAPIView):
@@ -89,11 +97,24 @@ class SubscribeAPIView(viewsets.ModelViewSet):
 
         if subs_item.exists():
             subs_item.delete()
-            message = 'подписка удалена'
+            message = "подписка удалена"
 
         else:
             subscribe = Subscribe(course=course_item, user=user)
             subscribe.save()
-            message = 'подписка добавлена'
+            message = "подписка добавлена"
 
         return Response({"message": message})
+
+
+class PaymentCreateAPIView(generics.CreateAPIView):
+    serializer_class = PaymentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        payment = serializer.save(user=self.request.user)
+        payment_course = get_product(payment.course_payment.name)
+        price = get_price(payment.course_payment.amount, payment_course)
+        session = get_session(price)
+        payment.link_on_payment = session
+        payment.save()
