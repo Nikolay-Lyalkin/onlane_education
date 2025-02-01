@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Course, Lesson, Subscribe, Payment
+from .models import Course, Lesson, Payment, Subscribe
 
 
 @admin.register(Course)
