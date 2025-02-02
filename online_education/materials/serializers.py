@@ -4,7 +4,7 @@ from rest_framework.fields import SerializerMethodField
 from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 
-from .models import Course, Lesson, Subscribe, Payment
+from .models import Course, Lesson, Payment, Subscribe
 from .validators import LinkOnVideoValidator
 
 

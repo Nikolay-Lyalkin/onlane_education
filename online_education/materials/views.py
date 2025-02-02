@@ -1,22 +1,16 @@
+from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets, generics
-
+from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from .models import Course, Lesson, Subscribe
 from .paginators import PaginationCourse, PaginationLesson
 from .permissions import IsModerator, IsOwner
-from .serializers import (
-    CourseSerializer,
-    LessonSerializer,
-    CourseListSerializer,
-    LessonCreateSerializer,
-    SubscribeSerializer,
-    CourseRetrieveSerializer,
-    PaymentSerializer,
-)
-from .services import get_product, get_price, get_session
+from .serializers import (CourseListSerializer, CourseRetrieveSerializer, CourseSerializer, LessonCreateSerializer,
+                          LessonSerializer, PaymentSerializer, SubscribeSerializer)
+from .services import get_price, get_product, get_session
+from .tasks import email_about_update
 
 
 class CourseListAPIView(generics.ListAPIView):
@@ -49,6 +43,11 @@ class CourseUpdateAPIView(generics.UpdateAPIView):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
     permission_classes = [IsAuthenticated, IsModerator | IsOwner]
+
+    def patch(self, request, *args, **kwargs):
+        course_id = request.data["id"]
+        email_about_update.delay(course_id)
+        return self.update(request, *args, **kwargs)
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
