@@ -7,8 +7,15 @@ from rest_framework.response import Response
 from .models import Course, Lesson, Subscribe
 from .paginators import PaginationCourse, PaginationLesson
 from .permissions import IsModerator, IsOwner
-from .serializers import (CourseListSerializer, CourseRetrieveSerializer, CourseSerializer, LessonCreateSerializer,
-                          LessonSerializer, PaymentSerializer, SubscribeSerializer)
+from .serializers import (
+    CourseListSerializer,
+    CourseRetrieveSerializer,
+    CourseSerializer,
+    LessonCreateSerializer,
+    LessonSerializer,
+    PaymentSerializer,
+    SubscribeSerializer,
+)
 from .services import get_price, get_product, get_session
 from .tasks import email_about_update
 
