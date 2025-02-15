@@ -1,6 +1,5 @@
-from django.db import models
-
 from config import settings
+from django.db import models
 
 
 class Course(models.Model):
@@ -15,6 +14,7 @@ class Course(models.Model):
         related_name="user_course",
         verbose_name="пользователь",
     )
+    amount = models.PositiveIntegerField(verbose_name="цена", blank=True, null=True)
 
     def __str__(self):
         return f"{self.name}"
@@ -41,6 +41,7 @@ class Lesson(models.Model):
         related_name="lesson",
         verbose_name="пользователь",
     )
+    amount = models.PositiveIntegerField(verbose_name="цена", blank=True, null=True)
 
     def __str__(self):
         return f"{self.name}"
@@ -53,7 +54,12 @@ class Lesson(models.Model):
 
 class Subscribe(models.Model):
     course = models.ForeignKey(
-        Course, blank=True, null=True, on_delete=models.CASCADE, related_name="subscribe_on_course", verbose_name="Подписка на курс"
+        Course,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="subscribe_on_course",
+        verbose_name="Подписка на курс",
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -65,9 +71,37 @@ class Subscribe(models.Model):
     )
 
     def __str__(self):
-            return f"{self.user}-{self.course}"
+        return f"{self.user}-{self.course}"
 
     class Meta:
         verbose_name = "Подписка"
         verbose_name_plural = "Подписки"
         db_table = "subscribe"
+
+
+class Payment(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name="user_payment",
+        verbose_name="пользователь",
+    )
+    course_payment = models.ForeignKey(
+        Course,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="payment_for_course",
+        verbose_name="Платёж за курс",
+    )
+    link_on_payment = models.URLField(max_length=400, verbose_name="ссылка на оплату", blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user}-{self.course_payment}"
+
+    class Meta:
+        verbose_name = "Платёж"
+        verbose_name_plural = "Платежи"
+        db_table = "paid_courses"

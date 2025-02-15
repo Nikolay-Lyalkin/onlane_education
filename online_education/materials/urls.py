@@ -1,9 +1,8 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
-
-from .apps import MaterialsConfig
 from . import views
+from .apps import MaterialsConfig
 
 app_name = MaterialsConfig.name
 
@@ -23,4 +22,6 @@ urlpatterns = [
     path("lesson/<int:pk>/", views.LessonRetrieveAPIView.as_view(), name="lesson_retrieve"),
     path("lesson/<int:pk>/delete/", views.LessonDeleteAPIView.as_view(), name="lesson_delete"),
     path("lesson/<int:pk>/update/", views.LessonUpdateAPIView.as_view(), name="lesson_update"),
+    # Payment
+    path("payment/create/", views.PaymentCreateAPIView.as_view(), name="payment_create"),
 ] + router.urls

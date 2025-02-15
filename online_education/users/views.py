@@ -1,18 +1,18 @@
 from django.contrib.auth.hashers import make_password
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets, generics
+from rest_framework import generics, viewsets
 from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import IsAuthenticated
 
-from .models import User, Payments
+from .models import Payments, User
 from .permissions import CanUserUpdate
 from .serializers import (
-    UserSerializer,
-    PaymentsSerializer,
     PaymentsListSerializer,
-    UserListSerializer,
+    PaymentsSerializer,
     UserCreateSerializer,
+    UserListSerializer,
     UserRetrieveSerializer,
+    UserSerializer,
 )
 
 

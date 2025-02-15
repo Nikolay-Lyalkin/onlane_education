@@ -1,11 +1,10 @@
-
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from rest_framework.fields import SerializerMethodField
 from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 
-from .models import Course, Lesson, Subscribe
+from .models import Course, Lesson, Payment, Subscribe
 from .validators import LinkOnVideoValidator
 
 
@@ -30,7 +29,7 @@ class CourseRetrieveSerializer(ModelSerializer):
         fields = "__all__"
 
     def get_subscribe(self, instance):
-        request = self.context['request']
+        request = self.context["request"]
         user = request.user
         subscribe_user = Subscribe.objects.filter(course=instance, user=user)
         if subscribe_user:
@@ -52,8 +51,15 @@ class LessonCreateSerializer(ModelSerializer):
         model = Lesson
         fields = "__all__"
         validators = [
-            LinkOnVideoValidator(fields='link_on_video'),
+            LinkOnVideoValidator(fields="link_on_video"),
         ]
+
+
+class PaymentSerializer(ModelSerializer):
+
+    class Meta:
+        model = Payment
+        fields = "__all__"
 
 
 class CourseListSerializer(ModelSerializer):
