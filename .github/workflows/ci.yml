@@ -22,6 +22,9 @@ jobs:
     - name: Change directory to project root
       run: cd online_education
 
+    - name: Change directory to project
+      run: cd online_education
+
     - name: Install dependencies
       run: |
         poetry install
