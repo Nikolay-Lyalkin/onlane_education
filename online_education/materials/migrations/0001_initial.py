@@ -14,7 +14,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Course",
             fields=[
-                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
                 ("name", models.CharField(verbose_name="Название курса")),
                 ("preview", models.ImageField(upload_to="course image/")),
                 ("description", models.TextField(verbose_name="Описание курса")),
@@ -28,7 +36,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Lesson",
             fields=[
-                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
                 ("name", models.CharField(verbose_name="Название урока")),
                 ("description", models.TextField(verbose_name="Описание урока")),
                 ("preview", models.ImageField(upload_to="lesson image/")),

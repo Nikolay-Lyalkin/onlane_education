@@ -7,7 +7,9 @@ from users.models import User
 class MaterialsTestCase(APITestCase):
 
     def setUp(self):
-        self.user = User.objects.create_user(username="test", email="test@yandex.ru", password="testpass")
+        self.user = User.objects.create_user(
+            username="test", email="test@yandex.ru", password="testpass"
+        )
         self.client.force_authenticate(user=self.user)
 
     def test_create_course(self):
@@ -18,7 +20,14 @@ class MaterialsTestCase(APITestCase):
         self.assertEquals(response.status_code, status.HTTP_201_CREATED)
 
         self.assertEquals(
-            response.json(), {"id": 1, "name": "Test_create", "preview": None, "description": None, "user": 1}
+            response.json(),
+            {
+                "id": 1,
+                "name": "Test_create",
+                "preview": None,
+                "description": None,
+                "user": 1,
+            },
         )
 
         self.assertTrue(Course.objects.all().exists())

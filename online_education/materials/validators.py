@@ -12,4 +12,6 @@ class LinkOnVideoValidator:
             return value
         elif tmp_value:
             if "youtube" not in tmp_value:
-                raise serializers.ValidationError("Вы прикрепили ссылку не на видео с ютуба")
+                raise serializers.ValidationError(
+                    "Вы прикрепили ссылку не на видео с ютуба"
+                )

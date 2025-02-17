@@ -13,11 +13,15 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="course",
             name="amount",
-            field=models.PositiveIntegerField(blank=True, null=True, verbose_name="цена"),
+            field=models.PositiveIntegerField(
+                blank=True, null=True, verbose_name="цена"
+            ),
         ),
         migrations.AddField(
             model_name="lesson",
             name="amount",
-            field=models.PositiveIntegerField(blank=True, null=True, verbose_name="цена"),
+            field=models.PositiveIntegerField(
+                blank=True, null=True, verbose_name="цена"
+            ),
         ),
     ]

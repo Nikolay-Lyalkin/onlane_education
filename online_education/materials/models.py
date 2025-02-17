@@ -29,9 +29,16 @@ class Lesson(models.Model):
     name = models.CharField(verbose_name="Название урока")
     description = models.TextField(verbose_name="Описание урока", blank=True, null=True)
     preview = models.ImageField(upload_to="lesson image/", blank=True, null=True)
-    link_on_video = models.URLField(verbose_name="сылка на видео урока", blank=True, null=True)
+    link_on_video = models.URLField(
+        verbose_name="сылка на видео урока", blank=True, null=True
+    )
     course = models.ForeignKey(
-        Course, blank=True, null=True, on_delete=models.SET_NULL, related_name="lesson", verbose_name="Курс"
+        Course,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="lesson",
+        verbose_name="Курс",
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -96,7 +103,9 @@ class Payment(models.Model):
         related_name="payment_for_course",
         verbose_name="Платёж за курс",
     )
-    link_on_payment = models.URLField(max_length=400, verbose_name="ссылка на оплату", blank=True, null=True)
+    link_on_payment = models.URLField(
+        max_length=400, verbose_name="ссылка на оплату", blank=True, null=True
+    )
 
     def __str__(self):
         return f"{self.user}-{self.course_payment}"

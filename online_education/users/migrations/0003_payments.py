@@ -17,13 +17,32 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Payments",
             fields=[
-                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
-                ("date_payment", models.DateField(default=django.utils.timezone.now, verbose_name="Дата оплаты")),
-                ("sum_payment", models.PositiveIntegerField(verbose_name="Сумма платежа")),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "date_payment",
+                    models.DateField(
+                        default=django.utils.timezone.now, verbose_name="Дата оплаты"
+                    ),
+                ),
+                (
+                    "sum_payment",
+                    models.PositiveIntegerField(verbose_name="Сумма платежа"),
+                ),
                 (
                     "method_payment",
                     models.CharField(
-                        choices=[("cash", "Наличные"), ("transfer_to_account", "перевод на счёт")],
+                        choices=[
+                            ("cash", "Наличные"),
+                            ("transfer_to_account", "перевод на счёт"),
+                        ],
                         verbose_name="Способ оплаты",
                     ),
                 ),
