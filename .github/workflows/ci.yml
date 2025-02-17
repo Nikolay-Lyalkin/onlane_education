@@ -6,12 +6,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    env:
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      POSTGRES_DB: ${{ secrets.DB_NAME }}
-      POSTGRES_USER: ${{ secrets.DB_USER }}
-      POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
-
     steps:
     - name: Check out code
       uses: actions/checkout@v3
@@ -33,7 +27,7 @@ jobs:
     - name: Run migrations
       run: |
         cd online_education
-        python manage.py migrate
+        poetry run python manage.py migrate
 
     - name: Run tests
       run: |
