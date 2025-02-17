@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         cd online_education
-        poetry install
+        poetry install --no-root
 
     - name: Run migrations
       run: |
