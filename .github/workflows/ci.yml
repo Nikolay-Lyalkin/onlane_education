@@ -6,6 +6,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: ${{ secrets.DB_NAME }}
+          POSTGRES_USER: ${{ secrets.DB_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DATABASE_HOST: "127.0.0.1"
+        ports:
+          - 5432:5432
+
     env:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
@@ -26,6 +37,13 @@ jobs:
       run: |
         cd online_education
         poetry install --no-root
+        
+    
+
+    - name: Run migrations
+      run: |
+        cd online_education
+        poetry run python manage.py migrate
 
     - name: Run tests
       run: |
