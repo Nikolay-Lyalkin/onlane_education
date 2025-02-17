@@ -33,7 +33,7 @@ jobs:
     - name: Run migrations
       run: |
         cd online_education
-        poetry run python manage.py migrate
+        python manage.py migrate
 
     - name: Run tests
       run: |
