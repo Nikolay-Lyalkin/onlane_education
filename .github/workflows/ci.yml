@@ -19,6 +19,9 @@ jobs:
       run: |
         pip install poetry
 
+    - name: Change directory to project root
+      run: cd
+
     - name: Install dependencies
       run: |
         poetry install
