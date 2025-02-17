@@ -31,7 +31,6 @@ jobs:
 
     - name: Run tests
       run: |
-        cd online_education
         poetry run python manage.py test
         
 
