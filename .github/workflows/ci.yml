@@ -26,10 +26,12 @@ jobs:
 
     - name: Run migrations
       run: |
+        cd online_education
         poetry run python manage.py migrate
 
     - name: Run tests
       run: |
+        cd online_education
         poetry run python manage.py test
         
 
