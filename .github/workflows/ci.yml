@@ -20,7 +20,7 @@ jobs:
         pip install poetry
 
     - name: Change directory to project root
-      run: cd online_education/online_education
+      run: cd online_education/pyproject.toml
 
 
     - name: Install dependencies
