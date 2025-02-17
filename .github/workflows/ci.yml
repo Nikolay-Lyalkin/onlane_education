@@ -38,7 +38,8 @@ jobs:
         cd online_education
         poetry install --no-root
         
-    
+    - name: Sleep
+      run: sleep 20
 
     - name: Run migrations
       run: |
