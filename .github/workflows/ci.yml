@@ -19,14 +19,9 @@ jobs:
       run: |
         pip install poetry
 
-    - name: Change directory to project root
-      run: cd online_education
-
-    - name: Change directory to project
-      run: cd online_education
-
     - name: Install dependencies
       run: |
+        cd online_education
         poetry install
 
     - name: Run migrations
