@@ -1,0 +1,2 @@
+"docker-compose up --build --force-recreate -d" # обновление имеющегося контейнера
+`docker-compose exec web bash` # попасть в командную строку контейнера
