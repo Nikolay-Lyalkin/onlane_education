@@ -13,9 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="course",
             name="description",
-            field=models.TextField(
-                blank=True, null=True, verbose_name="Описание курса"
-            ),
+            field=models.TextField(blank=True, null=True, verbose_name="Описание курса"),
         ),
         migrations.AlterField(
             model_name="course",
@@ -25,16 +23,12 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="lesson",
             name="description",
-            field=models.TextField(
-                blank=True, null=True, verbose_name="Описание урока"
-            ),
+            field=models.TextField(blank=True, null=True, verbose_name="Описание урока"),
         ),
         migrations.AlterField(
             model_name="lesson",
             name="link_on_video",
-            field=models.URLField(
-                blank=True, null=True, verbose_name="сылка на видео урока"
-            ),
+            field=models.URLField(blank=True, null=True, verbose_name="сылка на видео урока"),
         ),
         migrations.AlterField(
             model_name="lesson",

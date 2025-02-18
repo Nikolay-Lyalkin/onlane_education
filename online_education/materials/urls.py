@@ -47,7 +47,5 @@ urlpatterns = [
         name="lesson_update",
     ),
     # Payment
-    path(
-        "payment/create/", views.PaymentCreateAPIView.as_view(), name="payment_create"
-    ),
+    path("payment/create/", views.PaymentCreateAPIView.as_view(), name="payment_create"),
 ] + router.urls

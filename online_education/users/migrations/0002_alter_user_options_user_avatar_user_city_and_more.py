@@ -35,22 +35,16 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="user",
             name="phone_number",
-            field=models.CharField(
-                blank=True, null=True, verbose_name="Эоектронная почта"
-            ),
+            field=models.CharField(blank=True, null=True, verbose_name="Эоектронная почта"),
         ),
         migrations.AlterField(
             model_name="user",
             name="email",
-            field=models.EmailField(
-                max_length=50, unique=True, verbose_name="Эоектронная почта"
-            ),
+            field=models.EmailField(max_length=50, unique=True, verbose_name="Эоектронная почта"),
         ),
         migrations.AlterField(
             model_name="user",
             name="username",
-            field=models.CharField(
-                max_length=20, unique=True, verbose_name="Имя пользователя"
-            ),
+            field=models.CharField(max_length=20, unique=True, verbose_name="Имя пользователя"),
         ),
     ]

@@ -2,14 +2,14 @@ from materials.models import Course, Lesson
 from rest_framework import status
 from rest_framework.test import APITestCase
 from users.models import User
+import logging
 
 
 class MaterialsTestCase(APITestCase):
 
     def setUp(self):
-        self.user = User.objects.create_user(
-            username="test", email="test@yandex.ru", password="testpass"
-        )
+
+        self.user = User.objects.create_user(username="test", email="test@yandex.ru", password="testpass")
         self.client.force_authenticate(user=self.user)
 
     def test_create_course(self):
@@ -21,13 +21,7 @@ class MaterialsTestCase(APITestCase):
 
         self.assertEquals(
             response.json(),
-            {
-                "id": 1,
-                "name": "Test_create",
-                "preview": None,
-                "description": None,
-                "user": 1,
-            },
+            {"id": 1, "name": "Test_create", "preview": None, "description": None, "amount": None, "user": 1},
         )
 
         self.assertTrue(Course.objects.all().exists())
@@ -62,6 +56,7 @@ class MaterialsTestCase(APITestCase):
                 "description": None,
                 "preview": None,
                 "link_on_video": None,
+                "amount": None,
                 "course": None,
                 "user": 2,
             },
@@ -70,7 +65,7 @@ class MaterialsTestCase(APITestCase):
         self.assertTrue(Lesson.objects.all().exists())
 
     def test_list_lesson(self):
-        Lesson.objects.create(name="Test_list")
+        Lesson.objects.create(name="Test_list", user=self.user)
 
         response = self.client.get(
             "/lesson/",
@@ -91,8 +86,9 @@ class MaterialsTestCase(APITestCase):
                         "description": None,
                         "preview": None,
                         "link_on_video": None,
+                        "amount": None,
                         "course": None,
-                        "user": None,
+                        "user": 6,
                     }
                 ],
             },
@@ -121,6 +117,7 @@ class MaterialsTestCase(APITestCase):
                 "description": None,
                 "preview": None,
                 "link_on_video": None,
+                "amount": None,
                 "course": None,
                 "user": 7,
             },
@@ -143,6 +140,7 @@ class MaterialsTestCase(APITestCase):
                 "description": None,
                 "preview": None,
                 "link_on_video": None,
+                "amount": None,
                 "course": None,
                 "user": 5,
             },

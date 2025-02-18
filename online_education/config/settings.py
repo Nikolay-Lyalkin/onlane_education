@@ -166,9 +166,7 @@ SIMPLE_JWT = {
 }
 
 # URL-адрес брокера сообщений
-CELERY_BROKER_URL = (
-    "redis://redis/0"  # Например, Redis, который по умолчанию работает на порту 6379
-)
+CELERY_BROKER_URL = "redis://redis/0"  # Например, Redis, который по умолчанию работает на порту 6379
 
 # URL-адрес брокера результатов, также Redis
 CELERY_RESULT_BACKEND = "redis://redis/0"

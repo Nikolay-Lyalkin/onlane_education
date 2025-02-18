@@ -28,9 +28,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "date_payment",
-                    models.DateField(
-                        default=django.utils.timezone.now, verbose_name="Дата оплаты"
-                    ),
+                    models.DateField(default=django.utils.timezone.now, verbose_name="Дата оплаты"),
                 ),
                 (
                     "sum_payment",
