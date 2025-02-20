@@ -16,9 +16,20 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Payment",
             fields=[
-                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
                 ("amount", models.PositiveIntegerField(verbose_name="цена")),
-                ("link_on_payment", models.URLField(max_length=400, verbose_name="ссылка на оплату")),
+                (
+                    "link_on_payment",
+                    models.URLField(max_length=400, verbose_name="ссылка на оплату"),
+                ),
                 (
                     "course_payment",
                     models.ForeignKey(

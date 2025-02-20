@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import logging
 import os
+import sys
 from datetime import timedelta
 from pathlib import Path
 
@@ -179,3 +180,12 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
 EMAIL_SENDER = os.getenv("EMAIL_SENDER")
 # EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL")
+
+
+if "test" in sys.argv:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "test_db.sqlite3",
+        }
+    }

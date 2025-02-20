@@ -32,9 +32,23 @@ class PaymentsListSerializer(ModelSerializer):
     class Meta:
         model = Payments
         if Payments.paid_course:
-            fields = ("id", "user", "date_payment", "paid_course", "sum_payment", "method_payment")
+            fields = (
+                "id",
+                "user",
+                "date_payment",
+                "paid_course",
+                "sum_payment",
+                "method_payment",
+            )
         else:
-            fields = ("id", "user", "date_payment", "paid_lesson", "sum_payment", "method_payment")
+            fields = (
+                "id",
+                "user",
+                "date_payment",
+                "paid_lesson",
+                "sum_payment",
+                "method_payment",
+            )
 
 
 class UserListSerializer(ModelSerializer):

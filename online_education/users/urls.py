@@ -19,7 +19,19 @@ urlpatterns = [
     # Payments
     path("payments/create/", views.PaymentsCreateAPIView.as_view(), name="payment_create"),
     path("payments/", views.PaymentsListAPIView.as_view(), name="payment_list"),
-    path("payment/<int:pk>/", views.PaymentsRetrieveAPIView.as_view(), name="payment_retrieve"),
-    path("payment/<int:pk>/delete/", views.PaymentsDeleteAPIView.as_view(), name="payment_delete"),
-    path("payment/<int:pk>/update/", views.PaymentsUpdateAPIView.as_view(), name="payment_update"),
+    path(
+        "payment/<int:pk>/",
+        views.PaymentsRetrieveAPIView.as_view(),
+        name="payment_retrieve",
+    ),
+    path(
+        "payment/<int:pk>/delete/",
+        views.PaymentsDeleteAPIView.as_view(),
+        name="payment_delete",
+    ),
+    path(
+        "payment/<int:pk>/update/",
+        views.PaymentsUpdateAPIView.as_view(),
+        name="payment_update",
+    ),
 ]
