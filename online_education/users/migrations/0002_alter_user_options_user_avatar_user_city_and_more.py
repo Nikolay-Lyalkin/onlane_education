@@ -12,22 +12,30 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name="user",
-            options={"verbose_name": "Пользователь", "verbose_name_plural": "Пользователи"},
+            options={
+                "verbose_name": "Пользователь",
+                "verbose_name_plural": "Пользователи",
+            },
         ),
         migrations.AddField(
             model_name="user",
             name="avatar",
-            field=models.FileField(blank=True, null=True, upload_to="avatars/", verbose_name="Ваша фотография"),
+            field=models.FileField(
+                blank=True,
+                null=True,
+                upload_to="avatars/",
+                verbose_name="Ваша фотография",
+            ),
         ),
         migrations.AddField(
             model_name="user",
             name="city",
-            field=models.CharField(blank=True, null=True, verbose_name="Город"),
+            field=models.CharField(blank=True, null=True, verbose_name="Город", max_length=50),
         ),
         migrations.AddField(
             model_name="user",
             name="phone_number",
-            field=models.CharField(blank=True, null=True, verbose_name="Эоектронная почта"),
+            field=models.CharField(blank=True, null=True, verbose_name="Эоектронная почта", max_length=50),
         ),
         migrations.AlterField(
             model_name="user",

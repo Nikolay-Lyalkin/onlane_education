@@ -14,8 +14,12 @@ class Migration(migrations.Migration):
             model_name="payments",
             name="method_payment",
             field=models.CharField(
-                choices=[("cash", "Наличные"), ("transfer_to_account", "Перевод на счёт")],
+                choices=[
+                    ("cash", "Наличные"),
+                    ("transfer_to_account", "Перевод на счёт"),
+                ],
                 verbose_name="Способ оплаты",
+                max_length=50,
             ),
         ),
     ]

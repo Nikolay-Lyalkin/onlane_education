@@ -18,7 +18,8 @@ class MaterialsTestCase(APITestCase):
         self.assertEquals(response.status_code, status.HTTP_201_CREATED)
 
         self.assertEquals(
-            response.json(), {"id": 1, "name": "Test_create", "preview": None, "description": None, "user": 1}
+            response.json(),
+            {"id": 1, "name": "Test_create", "preview": None, "description": None, "amount": None, "user": 1},
         )
 
         self.assertTrue(Course.objects.all().exists())
@@ -37,9 +38,7 @@ class MaterialsTestCase(APITestCase):
         self.assertEquals(response.json(), {"message": "подписка удалена"})
 
     def test_create_lesson(self):
-        data = {
-            "name": "Test_create",
-        }
+        data = {"name": "Test_create"}
 
         response = self.client.post("/lesson/create/", data=data)
 
@@ -53,15 +52,16 @@ class MaterialsTestCase(APITestCase):
                 "description": None,
                 "preview": None,
                 "link_on_video": None,
+                "amount": None,
                 "course": None,
-                "user": 2,
+                "user": 1,
             },
         )
 
         self.assertTrue(Lesson.objects.all().exists())
 
     def test_list_lesson(self):
-        Lesson.objects.create(name="Test_list")
+        Lesson.objects.create(name="Test_list", user=self.user)
 
         response = self.client.get(
             "/lesson/",
@@ -77,13 +77,14 @@ class MaterialsTestCase(APITestCase):
                 "previous": None,
                 "results": [
                     {
-                        "id": 4,
+                        "id": 1,
                         "name": "Test_list",
                         "description": None,
                         "preview": None,
                         "link_on_video": None,
+                        "amount": None,
                         "course": None,
-                        "user": None,
+                        "user": 1,
                     }
                 ],
             },
@@ -92,7 +93,7 @@ class MaterialsTestCase(APITestCase):
     def test_delete_lesson(self):
         Lesson.objects.create(name="Test_delete", user=self.user)
 
-        response = self.client.delete("/lesson/2/delete/")
+        response = self.client.delete("/lesson/1/delete/")
 
         self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
 
@@ -100,20 +101,21 @@ class MaterialsTestCase(APITestCase):
         Lesson.objects.create(name="Test_put", user=self.user)
         data = {"name": "Test123"}
 
-        response = self.client.put("/lesson/5/update/", data=data)
+        response = self.client.put("/lesson/1/update/", data=data)
 
         self.assertEquals(response.status_code, status.HTTP_200_OK)
 
         self.assertEquals(
             response.json(),
             {
-                "id": 5,
+                "id": 1,
                 "name": "Test123",
                 "description": None,
                 "preview": None,
                 "link_on_video": None,
+                "amount": None,
                 "course": None,
-                "user": 7,
+                "user": 1,
             },
         )
 
@@ -121,7 +123,7 @@ class MaterialsTestCase(APITestCase):
         Lesson.objects.create(name="Test_detail", user=self.user)
 
         response = self.client.get(
-            "/lesson/3/",
+            "/lesson/1/",
         )
 
         self.assertEquals(response.status_code, status.HTTP_200_OK)
@@ -129,12 +131,13 @@ class MaterialsTestCase(APITestCase):
         self.assertEquals(
             response.json(),
             {
-                "id": 3,
+                "id": 1,
                 "name": "Test_detail",
                 "description": None,
                 "preview": None,
                 "link_on_video": None,
+                "amount": None,
                 "course": None,
-                "user": 5,
+                "user": 1,
             },
         )
