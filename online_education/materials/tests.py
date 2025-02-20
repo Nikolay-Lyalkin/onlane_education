@@ -2,13 +2,11 @@ from materials.models import Course, Lesson
 from rest_framework import status
 from rest_framework.test import APITestCase
 from users.models import User
-import logging
 
 
 class MaterialsTestCase(APITestCase):
 
     def setUp(self):
-
         self.user = User.objects.create_user(username="test", email="test@yandex.ru", password="testpass")
         self.client.force_authenticate(user=self.user)
 
@@ -40,9 +38,7 @@ class MaterialsTestCase(APITestCase):
         self.assertEquals(response.json(), {"message": "подписка удалена"})
 
     def test_create_lesson(self):
-        data = {
-            "name": "Test_create",
-        }
+        data = {"name": "Test_create"}
 
         response = self.client.post("/lesson/create/", data=data)
 
@@ -58,7 +54,7 @@ class MaterialsTestCase(APITestCase):
                 "link_on_video": None,
                 "amount": None,
                 "course": None,
-                "user": 2,
+                "user": 1,
             },
         )
 
@@ -81,14 +77,14 @@ class MaterialsTestCase(APITestCase):
                 "previous": None,
                 "results": [
                     {
-                        "id": 4,
+                        "id": 1,
                         "name": "Test_list",
                         "description": None,
                         "preview": None,
                         "link_on_video": None,
                         "amount": None,
                         "course": None,
-                        "user": 6,
+                        "user": 1,
                     }
                 ],
             },
@@ -97,7 +93,7 @@ class MaterialsTestCase(APITestCase):
     def test_delete_lesson(self):
         Lesson.objects.create(name="Test_delete", user=self.user)
 
-        response = self.client.delete("/lesson/2/delete/")
+        response = self.client.delete("/lesson/1/delete/")
 
         self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
 
@@ -105,21 +101,21 @@ class MaterialsTestCase(APITestCase):
         Lesson.objects.create(name="Test_put", user=self.user)
         data = {"name": "Test123"}
 
-        response = self.client.put("/lesson/5/update/", data=data)
+        response = self.client.put("/lesson/1/update/", data=data)
 
         self.assertEquals(response.status_code, status.HTTP_200_OK)
 
         self.assertEquals(
             response.json(),
             {
-                "id": 5,
+                "id": 1,
                 "name": "Test123",
                 "description": None,
                 "preview": None,
                 "link_on_video": None,
                 "amount": None,
                 "course": None,
-                "user": 7,
+                "user": 1,
             },
         )
 
@@ -127,7 +123,7 @@ class MaterialsTestCase(APITestCase):
         Lesson.objects.create(name="Test_detail", user=self.user)
 
         response = self.client.get(
-            "/lesson/3/",
+            "/lesson/1/",
         )
 
         self.assertEquals(response.status_code, status.HTTP_200_OK)
@@ -135,13 +131,13 @@ class MaterialsTestCase(APITestCase):
         self.assertEquals(
             response.json(),
             {
-                "id": 3,
+                "id": 1,
                 "name": "Test_detail",
                 "description": None,
                 "preview": None,
                 "link_on_video": None,
                 "amount": None,
                 "course": None,
-                "user": 5,
+                "user": 1,
             },
         )

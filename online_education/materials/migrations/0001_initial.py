@@ -23,9 +23,9 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("name", models.CharField(verbose_name="Название курса")),
+                ("name", models.CharField(verbose_name="Название курса", max_length=50)),
                 ("preview", models.ImageField(upload_to="course image/")),
-                ("description", models.TextField(verbose_name="Описание курса")),
+                ("description", models.TextField(verbose_name="Описание курса", max_length=1000)),
             ],
             options={
                 "verbose_name": "Курс",
@@ -45,8 +45,8 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("name", models.CharField(verbose_name="Название урока")),
-                ("description", models.TextField(verbose_name="Описание урока")),
+                ("name", models.CharField(verbose_name="Название урока", max_length=50)),
+                ("description", models.TextField(verbose_name="Описание урока", max_length=1000)),
                 ("preview", models.ImageField(upload_to="lesson image/")),
                 ("link_on_video", models.URLField(verbose_name="сылка на видео урока")),
                 (

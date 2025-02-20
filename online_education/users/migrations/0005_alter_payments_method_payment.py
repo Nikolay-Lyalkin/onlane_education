@@ -19,6 +19,7 @@ class Migration(migrations.Migration):
                     ("transfer_to_account", "Перевод на счёт"),
                 ],
                 verbose_name="Способ оплаты",
+                max_length=50,
             ),
         ),
     ]
